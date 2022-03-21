@@ -7,7 +7,7 @@ st.sidebar.table({'Fields':['Market Type','Total Orders','Drivers','Attrition Ra
                                 'Number of drivers currently in market',
                                 'Rate of driver attrition',
                                 'Number of orders deliverable per driver',
-                                'Rate in which applicants become drivers']}
+                                'Rate in which applicants become drivers']})
 with st.form("app_calculator"):
     col1, col2 = st.columns(2)
     model = st.radio("Market Type", options = ['New Market','Existing Market'])
