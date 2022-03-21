@@ -52,7 +52,7 @@ def calculate_applicants(model = model,
         return int(round(((attrition_rate * drivers) + (total_orders / order_rate) / conversion_rate),0)), model
 
 if submitted:
-    with st.container("output"):
+    with st.container():
         col1, col2 = st.columns(2)
         numapplicants,model = calculate_applicants()
         if model == 'New Market':
