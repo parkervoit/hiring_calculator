@@ -1,7 +1,5 @@
 import streamlit as st
 
-export STREAMLIT_THEME_BASE = 
-
 st.title("Applicant Calculator")
 st.sidebar.table({'Fields':['Market Type','Total Orders','Drivers','Attrition Rate','Order Rate','Conversion Rate'],
                   'Description':['Select type of market you are calculating applicant quantity for',
