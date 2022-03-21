@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.title("Applicant Calculator")
-with st.form("app_calculator")
+with st.form("app_calculator"):
     attrition_rate = st.number_input(label = 'Attrition Rate', 
                                     min_value = 0, 
                                     max_value = 1,
