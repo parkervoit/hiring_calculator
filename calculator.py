@@ -52,18 +52,24 @@ def calculate_applicants(model = model,
         return int(round(((attrition_rate * drivers) + (total_orders / order_rate) / conversion_rate),0)), model
 
 if submitted:
-    numapplicants,model = calculate_applicants()
-    if model == 'New Market':
-        st.write(f'Drivers needed to complete {int(total_orders)} orders : {int(round((total_orders / order_rate),0))}')
-        st.write(f'Drivers lost to attrition : {int(round((attrition_rate*(total_orders / order_rate)),0))}')
-        st.write(f'Applicants needed to complete {int(total_orders)} orders : {int(round(((total_orders / order_rate) / conversion_rate),0))}')
-        st.write(f'Applicants needed : {int(numapplicants)}')
-        st.metric(label = 'Drivers Lost to Attrition', value = int(round((attrition_rate*(total_orders / order_rate)),0)), delta = False)
-        st.metric(label = 'Applicants Needed', value = int(numapplicants), delta = False)
-    else: 
-        st.write(f'Drivers needed to complete {int(total_orders)} orders : {int(round((total_orders / order_rate),0))}')
-        st.write(f'Drivers lost to attrition : {int(round((attrition_rate * drivers),0))}')
-        st.write(f'Applicants needed to complete {int(total_orders)} additional orders : {int(round(((total_orders / order_rate) / conversion_rate),0))}')
-        st.write(f'Applicants needed : {int(numapplicants)}')
-        st.metric(label = 'Drivers Lost to Attrition', value = int(round((attrition_rate*(total_orders / order_rate)),0)), delta = False)
-        st.metric(label = 'Applicants Needed', value = int(numapplicants), delta = False)
+    with st.form("app_calculator"):
+        col1, col2 = st.columns(2)
+        numapplicants,model = calculate_applicants()
+        if model == 'New Market':
+            with col1:
+                st.metric(label = 'Drivers Lost to Attrition', value = int(round((attrition_rate*(total_orders / order_rate)),0)), delta = None)
+            with col2:
+                st.metric(label = 'Applicants Needed', value = int(numapplicants), delta = None)
+            st.write(f'Drivers needed to complete {int(total_orders)} orders : {int(round((total_orders / order_rate),0))}')
+            st.write(f'Drivers lost to attrition : {int(round((attrition_rate*(total_orders / order_rate)),0))}')
+            st.write(f'Applicants needed to complete {int(total_orders)} orders : {int(round(((total_orders / order_rate) / conversion_rate),0))}')
+            st.write(f'Applicants needed : {int(numapplicants)}')
+        else: 
+            with col1:
+                st.metric(label = 'Drivers Lost to Attrition', value = int(round((attrition_rate*(total_orders / order_rate)),0)), delta = None)
+            with col2:
+                st.metric(label = 'Applicants Needed', value = int(numapplicants), delta = None)
+            st.write(f'Drivers needed to complete {int(total_orders)} orders : {int(round((total_orders / order_rate),0))}')
+            st.write(f'Drivers lost to attrition : {int(round((attrition_rate * drivers),0))}')
+            st.write(f'Applicants needed to complete {int(total_orders)} additional orders : {int(round(((total_orders / order_rate) / conversion_rate),0))}')
+            st.write(f'Applicants needed : {int(numapplicants)}')
