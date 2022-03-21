@@ -2,25 +2,31 @@ import streamlit as st
 
 st.title("Applicant Calculator")
 with st.form("app_calculator"):
+    
+    model = st.radio("Market Type", options = ['New Market','Existing Market'])
+    
+    total_orders = st.number_input(label = 'Total Orders', 
+                                    min_value = float(0),
+                                    step = float(1))
+
+    drivers = st.number_input(label = 'Drivers', 
+                                    min_value = float(0),
+                                    step = float(1))    
+    
     attrition_rate = st.number_input(label = 'Attrition Rate', 
                                     min_value = float(0), 
                                     max_value = float(1),
                                     step = float(.02))
-    total_orders = st.number_input(label = 'Total Orders', 
-                                    min_value = float(0),
-                                    step = float(1))
-    drivers = st.number_input(label = 'Drivers', 
-                                    min_value = float(0),
-                                    step = float(1))
+
     order_rate = st.number_input(label = 'Order Rate', 
                                     min_value = float(0),
                                     step = float(.25))
-    conversion_rate = st.number_input(label = 'Conversion Rate4', 
+    conversion_rate = st.number_input(label = 'Conversion Rate', 
                                     min_value = float(0),
                                     max_value = float(1),
                                     step = float(.02))
 
-    model = st.selectbox("Pick your model", options = ['New Market','Existing Market'])
+ 
     submitted = st.form_submit_button("Calculate")
 
 
@@ -33,9 +39,9 @@ def calculate_applicants(model = model,
                          order_rate = order_rate,
                          conversion_rate = conversion_rate):
     if model == 'New Market':
-        return (attrition_rate*(total_orders / order_rate)) + (total_orders / order_rate) / conversion_rate, model
+        return int(round((attrition_rate*(total_orders / order_rate)) + (total_orders / order_rate) / conversion_rate),0)), model
     else:
-        return ((attrition_rate * drivers) + (total_orders / order_rate) / conversion_rate), model
+        return int(round(((attrition_rate * drivers) + (total_orders / order_rate) / conversion_rate),0)), model
 
 if submitted:
     numapplicants,model = calculate_applicants()
