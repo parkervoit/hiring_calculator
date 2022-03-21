@@ -2,7 +2,7 @@ import streamlit as st
 
 st.title("Applicant Calculator")
 with st.form("app_calculator"):
-    
+
     model = st.radio("Market Type", options = ['New Market','Existing Market'])
     
     total_orders = st.number_input(label = 'Total Orders', 
@@ -27,7 +27,7 @@ with st.form("app_calculator"):
                                     step = float(.02))
 
  
-    submitted = st.form_submit_button("Calculate")
+    submitted = st.form_submit_button("Calculate!")
 
 
 
@@ -39,7 +39,7 @@ def calculate_applicants(model = model,
                          order_rate = order_rate,
                          conversion_rate = conversion_rate):
     if model == 'New Market':
-        return int(round((attrition_rate*(total_orders / order_rate)) + (total_orders / order_rate) / conversion_rate),0)), model
+        return int(round(((attrition_rate*(total_orders / order_rate)) + (total_orders / order_rate) / conversion_rate),0)), model
     else:
         return int(round(((attrition_rate * drivers) + (total_orders / order_rate) / conversion_rate),0)), model
 
