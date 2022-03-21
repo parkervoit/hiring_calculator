@@ -46,12 +46,12 @@ def calculate_applicants(model = model,
 if submitted:
     numapplicants,model = calculate_applicants()
     if model == 'New Market':
-        st.write(f'Drivers needed to complete {total_orders} orders : {total_orders / order_rate}')
-        st.write(f'Drivers lost to attrition : {(attrition_rate*(total_orders / order_rate))}')
-        st.write(f'Applicants needed to complete {total_orders} orders : {(total_orders / order_rate) / conversion_rate}')
-        st.write(f'Applicants needed : {numapplicants}')
+        st.write(f'Drivers needed to complete {int(total_orders)} orders : {int(round((total_orders / order_rate),0))}')
+        st.write(f'Drivers lost to attrition : {int(round((attrition_rate*(total_orders / order_rate)),0))}')
+        st.write(f'Applicants needed to complete {int(total_orders)} orders : {int(round(((total_orders / order_rate) / conversion_rate),0))}')
+        st.write(f'Applicants needed : {int(numapplicants)}')
     else: 
-        st.write(f'Drivers needed to complete {total_orders} orders : {total_orders / order_rate}')
-        st.write(f'Drivers lost to attrition : {(attrition_rate * drivers)}')
-        st.write(f'Applicants needed to complete {total_orders} additional orders : {(total_orders / order_rate) / conversion_rate}')
-        st.write(f'Applicants needed : {numapplicants}')
+        st.write(f'Drivers needed to complete {int(total_orders)} orders : {int(round((total_orders / order_rate),0))}')
+        st.write(f'Drivers lost to attrition : {int(round((attrition_rate * drivers),0))}')
+        st.write(f'Applicants needed to complete {int(total_orders)} additional orders : {int(round(((total_orders / order_rate) / conversion_rate),0))}')
+        st.write(f'Applicants needed : {int(numapplicants)}')
