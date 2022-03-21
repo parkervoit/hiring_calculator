@@ -1,30 +1,42 @@
 import streamlit as st
 
-st.title("Applicant Calculator")
-with st.form("app_calculator"):
+export STREAMLIT_THEME_BASE = 
 
+st.title("Applicant Calculator")
+st.sidebar.table({'Fields':['Market Type','Total Orders','Drivers','Attrition Rate','Order Rate','Conversion Rate'],
+                  'Description':['Select type of market you are calculating applicant quantity for',
+                                'Total order demand in market',
+                                'Number of drivers currently in market',
+                                'Rate of driver attrition',
+                                'Number of orders deliverable per driver',
+                                'Rate in which applicants become drivers']}
+with st.form("app_calculator"):
+    col1, col2 = st.columns(2)
     model = st.radio("Market Type", options = ['New Market','Existing Market'])
     
-    total_orders = st.number_input(label = 'Total Orders', 
-                                    min_value = float(0),
-                                    step = float(1))
+    with col1: 
+        total_orders = st.number_input(label = 'Total Orders', 
+                                        min_value = float(0),
+                                        step = float(1))
 
-    drivers = st.number_input(label = 'Drivers', 
-                                    min_value = float(0),
-                                    step = float(1))    
-    
-    attrition_rate = st.number_input(label = 'Attrition Rate', 
-                                    min_value = float(0), 
-                                    max_value = float(1),
-                                    step = float(.02))
+        drivers = st.number_input(label = 'Drivers', 
+                                        min_value = float(0),
+                                        step = float(1))    
+    with col2: 
+        order_rate = st.number_input(label = 'Order Rate', 
+                                        min_value = float(0),
+                                        step = float(.25))
+        
+        attrition_rate = st.number_input(label = 'Attrition Rate', 
+                                        min_value = float(0), 
+                                        max_value = float(1),
+                                        step = float(.02))
 
-    order_rate = st.number_input(label = 'Order Rate', 
-                                    min_value = float(0),
-                                    step = float(.25))
-    conversion_rate = st.number_input(label = 'Conversion Rate', 
-                                    min_value = float(0),
-                                    max_value = float(1),
-                                    step = float(.02))
+
+        conversion_rate = st.number_input(label = 'Conversion Rate', 
+                                        min_value = float(0),
+                                        max_value = float(1),
+                                        step = float(.02))
 
  
     submitted = st.form_submit_button("Calculate!")
