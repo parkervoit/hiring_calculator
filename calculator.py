@@ -1,6 +1,7 @@
 import streamlit as st
 
 st.title("Applicant Calculator")
+st.sidebar.title('Field descriptions')
 st.sidebar.table({'Fields':['Market Type','Total Orders','Drivers','Attrition Rate','Order Rate','Conversion Rate'],
                   'Description':['Select type of market you are calculating applicant quantity for',
                                 'Total order demand in market',
@@ -13,6 +14,7 @@ with st.form("app_calculator"):
     model = st.radio("Market Type", options = ['New Market','Existing Market'])
     
     with col1: 
+        st.header('Totals')
         total_orders = st.number_input(label = 'Total Orders', 
                                         min_value = float(0),
                                         step = float(1))
@@ -21,6 +23,7 @@ with st.form("app_calculator"):
                                         min_value = float(0),
                                         step = float(1))    
     with col2: 
+        st.header('Rates')
         order_rate = st.number_input(label = 'Order Rate', 
                                         min_value = float(0),
                                         step = float(.25))
